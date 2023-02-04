@@ -1,25 +1,23 @@
-import React, { Component } from 'react';
+import { useState } from 'react';
 import style from './App.module.css';
 
 import { Searchbar } from 'components/Searchbar/Searchbar';
 import { ImageGallery } from 'components/ImageGallery/ImageGallery';
 
-export class App extends Component {
-  state = {
-    inputValue: '',
+export function App() {
+  const [inputValue, setInputValue] = useState('');
+
+  const handleFormSubmit = inputValue => {
+    setInputValue(inputValue);
   };
 
-  handleFormSubmit = inputValue => {
-    this.setState({ inputValue });
-  };
-
-  render() {
+  
     return (
       <div className={style.app}>
-        <Searchbar onSubmit={this.handleFormSubmit}></Searchbar>
+        <Searchbar onSubmit={handleFormSubmit}></Searchbar>
 
-        <ImageGallery inputValue={this.state.inputValue}></ImageGallery>
+        <ImageGallery inputValue={inputValue}></ImageGallery>
       </div>
     );
   }
-}
+
