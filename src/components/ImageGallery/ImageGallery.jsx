@@ -17,7 +17,7 @@ export function ImageGallery({ inputValue }) {
   const [images, setImages] = useState([]);
   const [page, setPage] = useState(1);
   const [status, setStatus] = useState(Status.IDLE);
-  const [error, setError] = useState(null);
+  
 
   useEffect(() => {
     const controller = new AbortController();
@@ -37,7 +37,7 @@ export function ImageGallery({ inputValue }) {
       })
       .catch(error => {
         setStatus(Status.REJECTED);
-        setError(error);
+      console.log(error.message)
       });
 
     return () => {
@@ -49,7 +49,7 @@ export function ImageGallery({ inputValue }) {
     setImages([]);
     setPage(1);
     setStatus(Status.IDLE);
-    setError(null);
+  
   }, [inputValue]);
 
   const LoadMore = () => {
