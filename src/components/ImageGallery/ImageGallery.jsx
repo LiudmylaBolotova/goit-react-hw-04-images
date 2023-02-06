@@ -4,7 +4,6 @@ import { ImageGalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem';
 import { Button } from '../Button/Button';
 
 export function ImageGallery({ images, LoadMore }) {
-  console.log(images);
   return (
     <>
       <ul className={style.gallery}>

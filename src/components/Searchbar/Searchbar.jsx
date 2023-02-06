@@ -9,7 +9,7 @@ export function Searchbar({ onSubmit }) {
     event.preventDefault();
     const form = event.currentTarget;
     const inputValue = form.elements.inputValue.value;
-    console.log(inputValue);
+
     if (inputValue.trim() === '') {
       return alert('Enter your request!');
     }
