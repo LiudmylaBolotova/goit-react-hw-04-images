@@ -15,8 +15,8 @@ export function ImageGalleryItem({ images }) {
     setIsModalOpen(!isModalOpen);
   };
 
-  const openModalImage = e => {
-    if (e.target.nodeName === 'IMG') {
+  const openModalImage = event => {
+    if (event.target.nodeName === 'IMG') {
       setIsModalOpen(true);
     }
   };

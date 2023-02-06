@@ -1,29 +1,21 @@
 import propTypes from 'prop-types';
-import { useState } from 'react';
+
 import { ImSearch } from 'react-icons/im';
 
 import style from '../Searchbar/Searchbar.module.css';
 
 export function Searchbar({ onSubmit }) {
-  const [inputValue, setInputValue] = useState('');
-
-  const handleChangeInput = event => {
-    setInputValue(event.target.value.toLowerCase());
-  };
-
   const onSubmitForm = event => {
     event.preventDefault();
-
+    const form = event.currentTarget;
+    const inputValue = form.elements.inputValue.value;
+    console.log(inputValue);
     if (inputValue.trim() === '') {
       return alert('Enter your request!');
     }
     onSubmit(inputValue);
 
-    reset();
-  };
-
-  const reset = () => {
-    setInputValue('');
+    form.reset();
   };
 
   return (
@@ -37,8 +29,7 @@ export function Searchbar({ onSubmit }) {
         <input
           className={style.searchFormInput}
           type="text"
-          value={inputValue}
-          onChange={handleChangeInput}
+          name="inputValue"
           placeholder="Search images and photos"
         />
       </form>

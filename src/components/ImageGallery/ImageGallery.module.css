@@ -11,16 +11,3 @@
   margin-right: auto;
 }
 
-.galleryText {
-  margin: auto;
-  font-size: large;
-  font-weight: 600;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-color:blue;
-}
-
-.galleryTextError {
-  margin: auto;
-  font-size: larger;
-  color: red;
-}
