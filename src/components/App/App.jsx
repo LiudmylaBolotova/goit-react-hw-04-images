@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import { Loader } from 'components/Loader/Loader';
+import { fetchImages } from '../../services';
 import style from './App.module.css';
 
 import { Searchbar } from 'components/Searchbar/Searchbar';
@@ -33,19 +33,19 @@ export function App() {
     }
 
     setStatus(Status.PENDING);
-    axios
-      .get(
-        `https://pixabay.com/api/?q=${inputValue}&page=${page}&key=29672596-80b7f00160ec49143013d00d9&image_type=photo&orientation=horizontal&per_page=12`,
-        { signal: controller.signal }
-      )
-      .then(res => {
+
+    (async function () {
+      try {
+        const finedImages = await fetchImages(inputValue, page, {
+          signal: controller.signal,
+        });
         setStatus(Status.RESOLVED);
-        setImages(prevState => [...prevState, ...res.data.hits]);
-      })
-      .catch(error => {
+        setImages(prevState => [...prevState, ...finedImages.hits]);
+      } catch (error) {
         setStatus(Status.REJECTED);
         console.log(error.message);
-      });
+      }
+    })();
 
     return () => {
       controller.abort();
@@ -69,7 +69,7 @@ export function App() {
 
   if (status === Status.PENDING) {
     <Searchbar onSubmit={handleSearchForm}></Searchbar>;
-    return <Loader></Loader>;
+    return <Loader />;
   }
 
   if (status === Status.RESOLVED && images.length > 0) {
